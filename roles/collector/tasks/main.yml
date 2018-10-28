@@ -1,0 +1,39 @@
+- name: install collectd
+  become: true
+  apt: name=collectd
+
+- name: Assures module dir exists
+  file: path=/opt/collectd/python/modules state=directory recurse=yes
+  become: true
+
+- copy: >
+    src=collectd.conf
+    dest=/etc/collectd/
+    owner=root
+    group=root
+    mode=0644
+  become: true
+
+- copy: >
+    src=elasticsearch.conf
+    dest=/etc/collectd/collectd.conf.d
+    owner=root
+    group=root
+    mode=0644
+  become: true
+
+- copy: >
+    src=elasticsearch.py
+    dest=/opt/collectd/python/modules
+    owner=root
+    group=root
+    mode=0644
+  become: true
+
+- name: Ensure services disabled
+  service: name=collectd enabled=yes
+  become: true
+
+- name: Ensure services restarted
+  service: name=collectd state=restarted
+  become: true
