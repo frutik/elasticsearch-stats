@@ -6,9 +6,9 @@
   file: path=/opt/collectd/python/modules state=directory recurse=yes
   become: true
 
-- copy: >
-    src=collectd.conf
-    dest=/etc/collectd/
+- template: >
+    src=collectd.conf.j2
+    dest=/etc/collectd/collectd.conf
     owner=root
     group=root
     mode=0644

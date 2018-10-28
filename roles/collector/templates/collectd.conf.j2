@@ -69,7 +69,7 @@ LoadPlugin "network"
 
 <Plugin "network">
   Listen "127.0.0.1"
-  Server "your-logstash-server-here"
+  Server "{{ logstash_server }}"
 </Plugin>
 
 <Include "/etc/collectd/collectd.conf.d">
